@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://willmigdol.com/blog.schema.json",
+  "title": "Blog",
+  "description": "Used to represent blog posts on my portfolio site",
+  "type": "object",
+  "properties": {
+    "title": {
+      "description": "The title of the blogpost",
+      "type": "string"{
+  loader: glob({
+    pattern: '**/*.md',
+    base: './src/data/blogs',
+  }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    isDraft: z.boolean().optional().default(true),
+    onHomepage: z.boolean().optional().default(false),
+    image: z.string().optional(),
+    description: z.string().optional()
+  })
+}
+    },
+    "slug": {
+      "description": "A one-word (or multi-word hyphenated) string used to identify the blogpost",
+      "type": "string"
+    },
+    "isDraft": {
+      "description": "Whether the blog post is intended to be a draft or not",
+      "type": "boolean",
+      "default": true
+    },
+    "onHomepage": {
+      "description": "Whether the blog post should be featured on the homepage",
+      "type": "boolean",
+      "default": false
+    },
+    "image": {
+      "type": "string",
+      "description": "Image representation for the blogpost"
+    },
+    "description": {
+      "type": "string",
+      "description": "Image representation for the blogpost"
+    },
+    "href": {
+      "type": "string",
+      "description": "External link for the application"
+    }
+  }
+}

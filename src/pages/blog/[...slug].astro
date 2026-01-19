@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getAllBlogPosts, getBlogFromSlug } from "../../content/BlogManager";
+import type { CollectionEntry } from "astro:content";
+import Layout from "@layout";
+import type { NavLocation } from "@lib/nav";
+import { render } from "astro:content";
+import { BlogHeader } from "../../components/BlogHeader";
+import dayjs from "dayjs";
+
+
+export const getStaticPaths = (async () => {
+  const blogs = await getAllBlogPosts();
+  return blogs.map(({data}) => {
+    return {
+      params: {
+        slug: data.slug
+      }
+    }
+  })
+}) satisfies GetStaticPaths;
+const {slug} = Astro.params;
+const blog = await getBlogFromSlug(slug) as CollectionEntry<'blog'>;
+
+const location: NavLocation = 'blog';
+const {Content, remarkPluginFrontmatter} = await render(blog);
+
+console.log('LAST MODIFIED IS', remarkPluginFrontmatter.lastModified);
+
+const lastModified:string = dayjs(remarkPluginFrontmatter.lastModified)
+															.format("DD/MM/YYYY");
+---
+
+<Layout location={location}>
+  <article>
+    <BlogHeader blog={blog} lastModified={lastModified}/>
+    <Content />
+  </article>
+</Layout>

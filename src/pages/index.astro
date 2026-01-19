@@ -1,16 +1,45 @@
 ---
+import { ContentList, Hero } from "@components"
 
+import Layout from '../layouts/layout.astro';
+import { getFrontPageBlogPosts } from "../content/BlogManager";
+import { getFrontPageProjects } from "../content/ProjectManager";
+import { date } from "astro:schema";
+
+const blogs = await getFrontPageBlogPosts();
+const projects = await getFrontPageProjects();
 ---
+<Layout location="home">
+	<Hero 
+		title="William Migdol",
+		subtitle="Full-stack developer building accessible, user-friendly web experiences"
+	/>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+	<hr/>
+	<ContentList
+		title="Blog Posts"
+		href="/blog"
+		content={blogs.map(({data}) => {return {
+			title: data.title,
+			href: `/blog/${data.slug}`,
+			image: data.image,
+			description: data.description || '',
+			slug: data.slug
+		}})}
+	/>
+
+	<hr>
+
+		<ContentList
+			title="Projects"
+			href="/projects"
+			content={projects.map(({data}) => {return {
+				title: data.title,
+				href: `/projects/${data.slug}`,
+				image: data.image,
+				description: data.description || '',
+				slug: data.slug
+			}})}
+	/>
+
+</Layout>

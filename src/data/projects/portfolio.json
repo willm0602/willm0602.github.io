@@ -1,0 +1,8 @@
+{
+  "title": "Portfolio",
+  "description": "This website!",
+  "slug": "portfolio",
+  "isDraft": false,
+  "onHomepage": true,
+  "image": "/avatar.svg"
+}

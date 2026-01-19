@@ -1,0 +1,27 @@
+---
+import { ContentList } from '@components';
+import Layout from '@layout'
+import type { NavLocation } from '@lib/nav'
+import { getAllBlogPosts } from '../content/BlogManager';
+import type { Content } from '@globals';
+
+const location: NavLocation = 'blog';
+const allBlogPosts = await getAllBlogPosts();
+const content: Content[] = allBlogPosts.map(({data}) => {
+  return {
+    ...data,
+    href: `/blog/${data.slug}`,
+    description: data.description || ''
+  }
+})
+---
+
+<Layout
+  location={location}
+>
+  <ContentList
+    title='All Blog Posts'
+    content={content}
+  />
+  
+</Layout>
