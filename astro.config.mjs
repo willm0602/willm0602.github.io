@@ -7,13 +7,14 @@ import remarkAutolinkHeadings from 'remark-autolink-headings';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'willm0602.github.io',
   markdown: {
     remarkPlugins: [
       remarkSlug,
       [
         remarkAutolinkHeadings,
         {
-          behavior: 'wrap',
+          behavior: 'wrap',willm0602.github.io
           linkProperties: {
             className: ['heading-anchor']
           }
