@@ -10,7 +10,7 @@ const allProjects = await getAllProjects();
 const content: Content[] = allProjects.map(({data}) => {
   return {
     ...data,
-    href: `/blog/${data.slug}`,
+    href: `/project/${data.slug}`,
     description: data.description || ''
   }
 })

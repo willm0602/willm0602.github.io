@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getAllBlogPosts, getBlogFromSlug } from "../../content/BlogManager";
+import type { CollectionEntry } from "astro:content";
+import Layout from "@layout";
+import type { NavLocation } from "@lib/nav";
+import { render } from "astro:content";
+import { BlogHeader } from "../../components/BlogHeader";
+import { getAllProjects, getProjectFromSlug } from "../../content/ProjectManager";
+
+
+export const getStaticPaths = (async () => {
+  const projects = await getAllProjects();
+  return projects.map(({data}) => {
+    return {
+      params: {
+        slug: data.slug
+      }
+    }
+  })
+}) satisfies GetStaticPaths;
+const {slug} = Astro.params;
+const project = await getProjectFromSlug(slug) as CollectionEntry<'project'>;
+
+const location: NavLocation = 'blog';
+---
+
+<Layout location={location}>
+  <h1>{project.data.title}</h1>
+</Layout>

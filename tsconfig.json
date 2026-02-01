@@ -12,6 +12,8 @@
     "jsxImportSource": "react",
     "paths": {
     	"@components": ["./src/components"],
+    	"@components/*": ["./src/components/*"],
+      "@data/*": ["./src/data/*"],
       "@globals": ["./src/globals.d.ts"],
       "@lib/*": ["./src/lib/*"],
       "@layout": ["./src/layouts/layout.astro"]

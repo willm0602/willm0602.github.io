@@ -1,14 +1,15 @@
-import type { CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 
-interface BlogHeaderProps{
-	blog: CollectionEntry<'blog'>,
-  lastModified: string
+interface BlogContentProps{
+	blog: CollectionEntry<'blog'>
 }
 
-export function BlogHeader({blog, lastModified}: BlogHeaderProps){
+export function BlogHeader({ blog }: BlogContentProps) {
+	const { title, image, lastModified } = blog.data;
   return <>
-    <h1>{blog.data.title}</h1>
-		<p>{blog.data.description}</p>
-		<p>{lastModified}</p>
+    <h1 id="blog-title">{title}</h1>
+		<p className="last-modified">Last Modified {lastModified}</p>
+		{image && <img className="blog-header-img" src={image} alt="" />}
   </>
 }
+

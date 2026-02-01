@@ -1,0 +1,18 @@
+---
+import Blog from '@components/Blog.astro';
+import Layout from '@layout'
+import type { NavLocation } from '@lib/nav'
+import type { CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
+
+const location:NavLocation = 'about';
+const blog:CollectionEntry<'blog'> | undefined = await getEntry('blog', 'about');
+
+if(!blog){
+  throw new Error('About me blog not found');
+}
+---
+
+<Layout location={location}>
+  <Blog blog={blog}/>
+</Layout>

@@ -18,6 +18,8 @@
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "remark-autolink-headings": "^7.0.1",
+    "remark-slug": "^7.0.1",
     "tailwindcss": "^4.1.18"
   }
 }

@@ -1,5 +1,6 @@
 import { NavLocations, type NavLocation } from "@lib/nav"
-import { GithubIcon, LinkedinIcon, RssIcon } from "lucide-react"
+import { GithubIcon, HamburgerIcon, LinkedinIcon, MenuIcon, RssIcon } from "lucide-react"
+import { useState } from "react"
 
 interface SidenavProps{
   location: NavLocation
@@ -20,7 +21,7 @@ const SidenavNames: Record<NavLocation, string> = {
 
 const SidenavLinks: Record<NavLocation, string> = {
   home: '/',
-  about: '/blog/about',
+  about: '/about',
   blog: '/blog',
   projects: '/projects'
 }
@@ -79,4 +80,27 @@ export function Sidebar({location}: SidenavProps){
     </div>
 
   </aside>
+}
+
+export function MobileNav(){
+  const [isOpened, setIsOpened] = useState(false);
+  
+  const toggleIsOpened = () => {setIsOpened(!isOpened)};
+
+  return <div className="mobile-nav">
+    {isOpened && <button className="opacity-mask" onClick={toggleIsOpened}></button>}
+    <button className="transparent-btn" onClick={toggleIsOpened}>
+      <MenuIcon width={32} height={32}/>
+    </button>
+    {isOpened && <ul>
+      {NavLocations.map((nav) => {
+      const href = SidenavLinks[nav];
+      const text = SidenavNames[nav];
+
+      return <li key={`sidenav-${nav}`} className="mobile-nav-link">
+        <a href={href}>{text}</a>
+      </li>
+    })}
+    </ul>}
+  </div>
 }

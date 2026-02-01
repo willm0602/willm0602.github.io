@@ -16,6 +16,8 @@
   --main: var(--red-40);
 
   --base-secondary: var(--blue-20);
+
+  --mobile-max-width: 900px;
 }
 
 html, body{
@@ -84,6 +86,7 @@ hr{
   align-items: center;
   flex-direction: column;
   border-radius: 12px;
+  text-align: center;
 
   .hero-title{
     font-size: 4em;
@@ -100,7 +103,7 @@ hr{
   border-width: 4px;
   border-radius: 12px;
   border-color: var(--gray-50);
-  padding: 2em;
+  padding: 2em 2em 0.5em 2em;
   display: flex;
   flex-direction: column;
 
@@ -126,10 +129,38 @@ hr{
 
   .card-buttons{
     justify-content: end;
+    margin-top: 2em;
   }
 
   .card-subtitle{
     margin: 0.25rem 0;
+  }
+}
+
+.mobile-card{
+  display: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--gray-50);
+  padding: 20px;
+  max-height: 200px;
+
+  .mobile-card-left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    margin-right: 2rem;
+    h3{
+      font-size: 2rem;
+      color: var(--secondary);
+    }
+  }
+
+  img{
+    height: 200px;
+    width: 200px;
   }
 }
 
@@ -142,7 +173,9 @@ hr{
   align-items: center;
   text-align: center;
   top: 0;
-  height: 95vh;
+  height: 100vh;
+  box-sizing: border-box;
+  margin-right: 2px;
 
   h2{
     font-size: 2rem;
@@ -194,6 +227,11 @@ hr{
   }
 }
 
+.transparent-btn{
+  border: none;
+  background-color: transparent;
+}
+
 .content-list{
   margin-top: 3rem;
   .content-list-header{
@@ -218,5 +256,110 @@ hr{
   .content-list-items{
     list-style: none;
     padding-left: 0;
+    flex-wrap: wrap;
+    display: flex;
+    li{
+      margin-bottom: 1rem;
+      margin-right: 1rem;
+    }
+  }
+}
+
+#blog-content{
+
+  #blog-title{
+    font-size: 3rem;
+    color: var(--main);
+  }
+
+  .blog-header-img{
+    max-width: 60vw;
+  }
+
+	h1, h2, h3, h4, h5, h6{
+		color: var(--secondary);
+    &:not(#blog-title){
+      margin-top: 2rem;
+    }
+    
+    *{
+      color: var(--secondary);
+    }
+
+    .heading-anchor:hover::before{
+      content: "# ";
+    }
+	}
+
+  .last-modified{
+    color: var(--gray-50);
+    font-style: italic;
+  }
+}
+
+.opacity-mask{
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0.5;
+}
+
+.mobile-nav{
+  display: none;
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  align-items: end;
+  flex-direction: column;
+  text-align: end;
+
+  ul{
+    list-style: none;
+    z-index: 20;
+
+    li{
+      font-size: 1.25rem;
+      background-color: var(--base-secondary);
+      border-style: solid;
+      border-width: 2px;
+      border-color: var(--gray-50);
+      width: 10rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 20px;
+      text-align: center;
+    }
+  }
+}
+
+
+
+
+/* NOTE: cannot be set from CSS variables in media queries */
+@media (max-width: 900px) {
+  .sidebar{
+    display: none;
+  }
+  
+  main{
+    padding: 1rem;
+  }
+  
+  .mobile-nav{
+    display: flex;
+  }
+
+  .card{
+    display: none;
+  }
+
+  .content-list li{
+    width: 100%;
+  }
+
+  .mobile-card{
+    display: flex
   }
 }

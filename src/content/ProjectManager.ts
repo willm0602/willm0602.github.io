@@ -9,3 +9,8 @@ export function getAllProjects(): Promise<Project[]>{
 export function getFrontPageProjects(): Promise<Project[]>{
   return getCollection('project', ({data}: {data: Project['data']}) => data.onHomepage && !data.isDraft )
 }
+
+export async function getProjectFromSlug(slug:string): Promise<Project|null>{
+  const projects = await getAllProjects();
+  return projects.find((p) => p.data.slug === slug) || null;
+}

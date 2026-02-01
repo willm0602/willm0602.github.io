@@ -1,0 +1,34 @@
+---
+import type { ContentEntryType } from "astro";
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import { BlogHeader } from "./BlogHeader";
+
+// NOTE: astro content renders as astro components which cannot be used in TSX so we use this for the entire blog components
+
+interface BlogProps{
+  blog: CollectionEntry<'blog'>
+}
+
+const props = Astro.props as BlogProps;
+
+const {blog} = props;
+
+const {Content} = await render(blog);
+---
+
+<article id="blog-content">
+  <BlogHeader blog={blog}/>
+  <Content />
+</article>
+
+<script>
+  const links = document.querySelector('.heading-anchor');
+  if(links){
+    links.addEventListener('click', (e) => {
+      e.preventDefault();
+      const a = e.currentTarget as HTMLAnchorElement;
+      navigator.clipboard.writeText(a.href);
+    })
+  }
+</script>

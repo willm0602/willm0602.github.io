@@ -2,6 +2,7 @@
 import { Sidenav } from "@components";
 import "../styles/global.css";
 import type { NavLocation } from "@lib/nav";
+import { MobileNav } from "../components/Sidenav";
 
 interface LayoutProps {
   location: NavLocation
@@ -25,6 +26,7 @@ const {location} = Astro.props as LayoutProps;
   <Sidenav
     location={location}
   />
+  <MobileNav client:load/>
   <main>
     <slot/>
   </main>

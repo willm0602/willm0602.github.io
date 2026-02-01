@@ -2,19 +2,29 @@
 import { defineConfig } from 'astro/config';
 
 import react from '@astrojs/react';
-
-import tailwindcss from '@tailwindcss/vite';
-import { remarkModifiedTime } from './src/remarkModifiedTime.mjs';
+import remarkSlug from 'remark-slug';
+import remarkAutolinkHeadings from 'remark-autolink-headings';
 
 // https://astro.build/config
 export default defineConfig({
+  markdown: {
+    remarkPlugins: [
+      remarkSlug,
+      [
+        remarkAutolinkHeadings,
+        {
+          behavior: 'wrap',
+          linkProperties: {
+            className: ['heading-anchor']
+          }
+        }
+      ]
+    ]
+  },
   integrations: [
-		react(),
+    react(),
   ],
 
   vite: {
-	},
-	markdown: {
-		remarkPlugins: [remarkModifiedTime]
-	}
+  },
 });

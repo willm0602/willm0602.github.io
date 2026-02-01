@@ -7,7 +7,7 @@ import type { Content } from '@globals';
 
 const location: NavLocation = 'blog';
 const allBlogPosts = await getAllBlogPosts();
-const content: Content[] = allBlogPosts.map(({data}) => {
+const content: Content[] = allBlogPosts.filter(({data}) => !data.isDraft).map(({data}) => {
   return {
     ...data,
     href: `/blog/${data.slug}`,

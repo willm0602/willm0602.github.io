@@ -7,7 +7,7 @@ import type { NavLocation } from "@lib/nav";
 import { render } from "astro:content";
 import { BlogHeader } from "../../components/BlogHeader";
 import dayjs from "dayjs";
-
+import Blog from "@components/Blog.astro";
 
 export const getStaticPaths = (async () => {
   const blogs = await getAllBlogPosts();
@@ -23,17 +23,9 @@ const {slug} = Astro.params;
 const blog = await getBlogFromSlug(slug) as CollectionEntry<'blog'>;
 
 const location: NavLocation = 'blog';
-const {Content, remarkPluginFrontmatter} = await render(blog);
 
-console.log('LAST MODIFIED IS', remarkPluginFrontmatter.lastModified);
-
-const lastModified:string = dayjs(remarkPluginFrontmatter.lastModified)
-															.format("DD/MM/YYYY");
 ---
 
 <Layout location={location}>
-  <article>
-    <BlogHeader blog={blog} lastModified={lastModified}/>
-    <Content />
-  </article>
+  <Blog blog={blog}/>
 </Layout>
