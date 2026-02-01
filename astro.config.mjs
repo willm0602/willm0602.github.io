@@ -7,7 +7,7 @@ import remarkAutolinkHeadings from 'remark-autolink-headings';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'willm0602.github.io',
+  site: 'https://willm0602.github.io',
   markdown: {
     remarkPlugins: [
       remarkSlug,
