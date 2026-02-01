@@ -14,7 +14,7 @@ export default defineConfig({
       [
         remarkAutolinkHeadings,
         {
-          behavior: 'wrap',willm0602.github.io
+          behavior: 'wrap',
           linkProperties: {
             className: ['heading-anchor']
           }
